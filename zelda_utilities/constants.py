@@ -5,6 +5,29 @@ from pygame.locals import *
 # Set shorthand for vector
 vec = pygame.math.Vector2
 
+####################
+# CAN EDIT THESE CONTROLS!
+####################
+
+# Which joystick/game-pad index to use
+#  (second stick/pad plugged in would be 1, etc.)
+JOY_INDEX = 0
+
+# Keyboard control constants
+P1_KB_UP = pygame.K_e
+P1_KB_DOWN = pygame.K_d
+P1_KB_LEFT = pygame.K_s
+P1_KB_RIGHT = pygame.K_f
+P1_KB_BUTTON1 = pygame.K_j
+P1_KB_BUTTON2 = pygame.K_k
+#  for testing
+P1_SHOW_FPS = K_9
+P1_SHOW_BOUNDING_BOXES = K_0
+
+####################
+# PROBABLY SHOULDN'T EDIT THESE SETTINGS!
+####################
+
 # Set File Paths  #TODO: Might need to edit paths/loading if not on Windows?
 WINDOW_ICON = 'assets/icon/zelda_icon.png'
 MAP_FILE = 'assets/map/castle_garden_tiled.tmx'
@@ -24,21 +47,6 @@ TILE_SIZE = 16
 FRAME_RATE = 60
 # Animation frame-rate in frames/sec
 ANIMATION_RATE = 12
-
-# Which joystick/game-pad index to use
-#  (second stick/pad plugged in would be 1, etc.)
-JOY_INDEX = 0
-
-# Keyboard control constants
-P1_KB_UP = pygame.K_e
-P1_KB_DOWN = pygame.K_d
-P1_KB_LEFT = pygame.K_s
-P1_KB_RIGHT = pygame.K_f
-P1_KB_BUTTON1 = pygame.K_j
-P1_KB_BUTTON2 = pygame.K_k
-#  for testing
-P1_SHOW_FPS = K_9
-P1_SHOW_BOUNDING_BOXES = K_0
 
 # Health values
 PLAYER_HEALTH = 20
@@ -87,4 +95,3 @@ AQUA = (0, 255, 128)
 CERULEAN = (0, 128, 255)
 PURPLE = (128, 0, 255)
 PINK = (255, 0, 128)
-
