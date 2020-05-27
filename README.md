@@ -1,28 +1,33 @@
-##PyGame Zelda clone
-#####This was my final project for:  
+# PyGame Zelda clone
+## This was my final project for:  
 Stanford's **Code In Place** class 2020  
 _(finished early morning on May 26, just before the goal deadline)_
     
 (also, cleaned up the code and comments a bit and removed unnecessary files  
-for GitHub upload)
-####Video:
+for GitHub upload)  
+
+## Video:
 https://www.youtube.com/watch?v=W4mi1ZyoYjQ
-####About:
+
+## About:
 Objective right now is to give all the Karel robots 3 beepers.  
 Game exits on losing all player stamina or loading up _all_ the Karels with beepers.  
 
 Some settings can be edited in constants.py, like joystick index and controls.
-###Controls:
-#####Keyboard
+
+## Controls:
+### Keyboard
 ESDF - movement  
 J - place beepers  
 ESC - close  
 9 - Show FPS (in window title)  
 0 - Show bounding boxes for collisions
-#####Gamepad / Joystick
+
+### Gamepad / Joystick
 Analog _or_ D-Pad[hat] - movement  
 A button (Xbox controller)[button 0] - place beepers
-###Attributions:
+
+## Attributions:
 Tried to include as much as I could in the code comments, but I leaned heavily on these videos,  
 especially for the Camera and Tiled Map Editor map loading:  
 
@@ -37,7 +42,7 @@ but the placeholder Zelda sprites and map are Nintendo's and modified from:
 https://www.spriters-resource.com/game_boy_advance/thelegendofzeldafourswords/sheet/1630
 https://www.spriters-resource.com/game_boy_advance/thelegendofzeldatheminishcap/sheet/6441
 
-###Programs used:
+### Programs used:
 PyCharm - https://www.jetbrains.com/pycharm  
 Aseprite - https://www.aseprite.org/quickref  
 Tiled Map Editor - https://www.mapeditor.org  
