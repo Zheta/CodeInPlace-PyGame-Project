@@ -39,7 +39,7 @@ https://github.com/StevePaget/Pygame_Functions
 
 My plan initially was to use them for placeholders and make my own later,  
 but the placeholder Zelda sprites and map are Nintendo's and modified from:  
-https://www.spriters-resource.com/game_boy_advance/thelegendofzeldafourswords/sheet/1630
+https://www.spriters-resource.com/game_boy_advance/thelegendofzeldafourswords/sheet/1630  
 https://www.spriters-resource.com/game_boy_advance/thelegendofzeldatheminishcap/sheet/6441
 
 ### Programs used:
