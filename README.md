@@ -1,5 +1,5 @@
 # PyGame Zelda clone
-## This was my final project for:  
+**This was my final project for:**  
 Stanford's **Code In Place** class 2020  
 _(finished early morning on May 26, just before the goal deadline)_
     
@@ -15,19 +15,19 @@ Game exits on losing all player stamina or loading up _all_ the Karels with beep
 
 Some settings can be edited in constants.py, like joystick index and controls.
 
-## Controls:
-### Keyboard
+### Controls:
+#### Keyboard
 ESDF - movement  
 J - place beepers  
 ESC - close  
 9 - Show FPS (in window title)  
 0 - Show bounding boxes for collisions
 
-### Gamepad / Joystick
+#### Gamepad / Joystick
 Analog _or_ D-Pad[hat] - movement  
 A button (Xbox controller)[button 0] - place beepers
 
-## Attributions:
+### Attributions:
 Tried to include as much as I could in the code comments, but I leaned heavily on these videos,  
 especially for the Camera and Tiled Map Editor map loading:  
 
