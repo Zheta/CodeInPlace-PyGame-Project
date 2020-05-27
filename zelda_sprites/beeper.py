@@ -1,11 +1,10 @@
 # Import local files
-from zelda_utilities.collision import collide_with_walls
 from zelda_utilities.constants import *
 vec = pygame.math.Vector2
 
 
 class Beeper(pygame.sprite.Sprite):
-    def __init__(self, game, pos, file_name='assets/image/spritesheet/karel/beeper_small.png', frames=1):
+    def __init__(self, game, pos, file_name, frames=1):
         # initialize parent class
         super().__init__()
         # Set game class

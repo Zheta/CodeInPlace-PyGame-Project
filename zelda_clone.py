@@ -1,12 +1,7 @@
-# Import standard
-import random
-
 # Import other modules
-import pygame
-
-# Import local files
 from pygame.sprite import Group
 
+# Import local files
 from animation import Animation
 from camera import Camera
 from control import Control
@@ -25,21 +20,21 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 # ~HUD functions
 # Health bar
 # TODO: use images or counter to represent health?
-def draw_player_health(surf, x, y, pct):
+def draw_player_health(surf, x, y, player_health):
     bar_length = 40
     bar_height = 10
-    if pct < 0:
-        pct = 0
-    fill = pct * bar_length
+    fill = player_health * (bar_length // PLAYER_HEALTH)
+    print(fill)
     outline_rect = pygame.Rect(x, y, bar_length, bar_height)
     fill_rect = pygame.Rect(x, y, fill, bar_height)
-    if pct > 0.6:
+    if fill > 12:
         col = GREEN
-    elif pct > 0.3:
+    elif fill > 6:
         col = YELLOW
     else:
         col = RED
-    pygame.draw.rect(surf, col, fill_rect)
+    if player_health > 0:
+        pygame.draw.rect(surf, col, fill_rect)
     pygame.draw.rect(surf, WHITE, outline_rect, 1)
 
 
@@ -50,24 +45,22 @@ class Game:
     def __init__(self):
         # Initialize pygame
         pygame.init()
-        # Initialize game-pad / joystick[0]
-        self.control = Control(self)
+
         # Create variable to satisfy game loop
         self.running = True
 
+        # Initialize game-pad / joystick[0]
+        self.control = Control(self)
+
         # Set window title and icon
         pygame.display.set_caption('Zorlda')
-        self.icon = pygame.image.load('assets/icon/zelda_icon.png')
+        self.icon = pygame.image.load(WINDOW_ICON)
         pygame.display.set_icon(self.icon)
 
         # Set display size to match assets, create display, and scale
+        #  'SCALED' flag seems to be an integer scalar that is in PyGame 2.0.0+
+        #  without, game runs at original pixel resolution (currently at 320x180)
         self.screen = pygame.display.set_mode((ART_SCALE_X, ART_SCALE_Y), SCALED)
-
-        # ~Levels/Maps
-        # Load the map!
-        self.map = TiledMap('assets/maps/castle_garden_tiled.tmx')
-        self.map_img = self.map.make_map()
-        self.map_rect = self.map_img.get_rect()
 
         # ~Sprite Groups~
         # ALL sprites # group with all sprites for camera updates
@@ -83,20 +76,17 @@ class Game:
         # Beeper group
         self.beepers = pygame.sprite.Group()
 
-        # Load map from Tiled file
-        for tile_object in self.map.tmxdata.objects:
-            if tile_object.name == 'karel':
-                # place Karels
-                Karel(self, tile_object.x, tile_object.y)
-            if tile_object.name == 'player':
-                # Place Player
-                self.player = Player(self, tile_object.x, tile_object.y)
-            if tile_object.name == 'wall':
-                # place wall, etc. bounding boxes
-                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+        # ~Levels/Maps
+        # Load the map file
+        self.map = TiledMap(MAP_FILE)
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
+
+        # Load objects from map
+        self.load_map_obj()
 
         # -Background objects - transparent layer on top of other sprites bushes, fountains, etc.
-        self.bg_objects = BGObjects(self, 0, 0)
+        self.bg_objects = BGObjects(self, 0, 0, BG_OBJECTS_IMG)
 
         # ~Clocks
         # Pygame clock
@@ -113,6 +103,18 @@ class Game:
         # Testing
         self.show_fps = False
         self.draw_debug = False
+
+    def load_map_obj(self):
+        for tile_object in self.map.tmxdata.objects:
+            if tile_object.name == 'player':
+                # Place Player
+                self.player = Player(self, tile_object.x, tile_object.y, PLAYER_SPRITESHEET)
+            if tile_object.name == 'karel':
+                # place Karels
+                Karel(self, tile_object.x, tile_object.y, KAREL_SPRITESHEET)
+            if tile_object.name == 'wall':
+                # place wall, etc. bounding boxes
+                Obstacle(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
 
     def input_processing(self):
         self.control.get_input()
@@ -167,7 +169,7 @@ class Game:
                 pygame.draw.rect(self.screen, CYAN, self.camera.apply_rect(wall.rect), 1)
 
         # HUD functions
-        draw_player_health(self.screen, 10, 10, self.player.health / PLAYER_HEALTH)
+        draw_player_health(self.screen, 10, 10, self.player.health)
 
         # Update display
         pygame.display.update()

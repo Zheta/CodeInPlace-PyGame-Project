@@ -11,9 +11,14 @@ class Control:
     def __init__(self, game):
         self.game = game
 
-        # Initialize game-pad/joysticks
-        self.joy = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
-        self.joy[0].init()
+        # Check for joysticks/game-pads
+        self.joy_amount = pygame.joystick.get_count()
+        if self.joy_amount > 0:
+            # Initialize game-pad/joystick, uses the index in zelda_utilities/constants
+            # TODO: certainly if the game ever had a pause menu or options screen,
+            #   being able to choose the joystick index there would be nice
+            self.joy = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+            self.joy[JOY_INDEX].init()
 
         # Player movement variables
 
@@ -113,23 +118,23 @@ class Control:
             # Joystick d-pad
             elif event.type == JOYHATMOTION:
                 # get value of joystick hat switch (d-pad)
-                self.joy_hat_input = self.joy[0].get_hat(0)
+                self.joy_hat_input = self.joy[JOY_INDEX].get_hat(0)
                 # print(str(joy_hat))  # for testing!
                 self.joy_hat_active = True
             # Joystick left-analog
             elif event.type == JOYAXISMOTION:
                 # get values of joystick left analog stick
-                self.joy_lf_analog_x = self.joy[0].get_axis(0)
-                self.joy_lf_analog_y = self.joy[0].get_axis(1)
+                self.joy_lf_analog_x = self.joy[JOY_INDEX].get_axis(0)
+                self.joy_lf_analog_y = self.joy[JOY_INDEX].get_axis(1)
                 # print('x: ' + str(self.joy_lf_analog_x))  # for testing!
                 # print('y: ' + str(self.joy_lf_analog_y))  # for testing!
                 self.joy_lf_analog_active = True
             elif event.type == pygame.JOYBUTTONDOWN:
-                self.joy_button_a = self.joy[0].get_button(0)
-                self.joy_button_b = self.joy[0].get_button(1)
+                self.joy_button_a = self.joy[JOY_INDEX].get_button(0)
+                self.joy_button_b = self.joy[JOY_INDEX].get_button(1)
             elif event.type == pygame.JOYBUTTONUP:
-                self.joy_button_a = self.joy[0].get_button(0)
-                self.joy_button_b = self.joy[0].get_button(1)
+                self.joy_button_a = self.joy[JOY_INDEX].get_button(0)
+                self.joy_button_b = self.joy[JOY_INDEX].get_button(1)
 
         # player d-pad active
         if self.joy_hat_active:
@@ -246,6 +251,7 @@ class Control:
         # If keyboard has a direction list
         if self.kb_direction_list:
             # set facing
+            # based on earliest input still in the list
             self.facing = self.kb_direction_list[0]
             # cardinals
             if len(self.kb_direction_list) == 1:

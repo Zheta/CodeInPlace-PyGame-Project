@@ -1,12 +1,13 @@
+# Import standard
+import random
+
 # Import local files
 from zelda_utilities.collision import *
 from zelda_utilities.constants import *
 
-vec = pygame.math.Vector2
-
 
 class Karel(pygame.sprite.Sprite):
-    def __init__(self, game, x, y, file_name='assets/image/spritesheet/karel/karel_small.png', frames=53):
+    def __init__(self, game, x, y, file_name, frames=53):
         # initialize parent class
         super().__init__()
         # Set game class

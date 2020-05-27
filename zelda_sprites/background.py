@@ -1,12 +1,11 @@
 # Import other modules
-import pygame
 import pytmx
 
 # Import local files
 from zelda_utilities.constants import *
 
 
-# Loads Tiled Map Editor maps!
+# Loads Tiled Map Editor map!
 # Almost verbatim from:
 #  Chris Bradfield - KidsCanCode
 #  Tile-based game Part 12: Loading Tiled Maps
@@ -56,7 +55,7 @@ class Obstacle(pygame.sprite.Sprite):
 
 # Top transparent layer
 class BGObjects(pygame.sprite.Sprite):
-    def __init__(self, game,  x, y, file_name='assets/image/background/castle_garden_tiled_objects.png'):
+    def __init__(self, game,  x, y, file_name):
         # initialize parent class
         super().__init__()
         # Set game class
@@ -65,7 +64,6 @@ class BGObjects(pygame.sprite.Sprite):
         # ~Sprite Groups
         self.game.all_sprites.add(self)
 
-        # self.image = pygame.image.load(~file~).convert_alpha()
         self.image = pygame.image.load(file_name).convert_alpha()
         # Create rect, and take arguments for starting position
         self.rect = self.image.get_rect()

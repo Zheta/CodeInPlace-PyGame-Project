@@ -1,13 +1,17 @@
-# Import standard
-import os
-import random
-
 # Import other modules
 import pygame
 from pygame.locals import *
 
 # Set shorthand for vector
 vec = pygame.math.Vector2
+
+# Set File Paths  #TODO: Might need to edit paths/loading if not on Windows?
+WINDOW_ICON = 'assets/icon/zelda_icon.png'
+MAP_FILE = 'assets/map/castle_garden_tiled.tmx'
+BG_OBJECTS_IMG = 'assets/image/background/castle_garden_tiled_objects.png'
+PLAYER_SPRITESHEET = 'assets/image/spritesheet/zelda/zelda_character.png'
+KAREL_SPRITESHEET = 'assets/image/spritesheet/karel/karel_small.png'
+BEEPER_SPRITESHEET = 'assets/image/spritesheet/beeper/beeper_small.png'
 
 # Game constants
 # All art produced at this screen scale and then *integer scaled* up on run
@@ -21,8 +25,9 @@ FRAME_RATE = 60
 # Animation frame-rate in frames/sec
 ANIMATION_RATE = 12
 
-# Rate at which to spawn beepers
-BEEPER_RATE = 300
+# Which joystick/game-pad index to use
+#  (second stick/pad plugged in would be 1, etc.)
+JOY_INDEX = 0
 
 # Keyboard control constants
 P1_KB_UP = pygame.K_e
@@ -31,14 +36,16 @@ P1_KB_LEFT = pygame.K_s
 P1_KB_RIGHT = pygame.K_f
 P1_KB_BUTTON1 = pygame.K_j
 P1_KB_BUTTON2 = pygame.K_k
-
-# Player starting coordinates
-# P1_START = ((ART_SCALE_X[0] // 2), (ART_SCALE_X[1] // 2))
-P1_START = (10, 4)
+#  for testing
+P1_SHOW_FPS = K_9
+P1_SHOW_BOUNDING_BOXES = K_0
 
 # Health values
 PLAYER_HEALTH = 20
 KAREL_HEALTH = 3
+
+# Rate at which to spawn beepers from player input
+BEEPER_RATE = 300
 
 # ~Speed/direction constants~
 # Directional speed base
@@ -56,10 +63,6 @@ D_UP_LEFT = (D_SPEED * -1, D_SPEED * -1)
 D_UP_RIGHT = (D_SPEED, D_SPEED * -1)
 D_DOWN_LEFT = (D_SPEED * -1, D_SPEED)
 D_DOWN_RIGHT = (D_SPEED, D_SPEED)
-
-# Testing
-P1_SHOW_FPS = K_9
-P1_SHOW_BOUNDING_BOXES = K_0
 
 # Colors for testing, quick rectangle making
 # define some colors (R, G, B)

@@ -3,11 +3,9 @@ from zelda_sprites.beeper import Beeper
 from zelda_utilities.collision import *
 from zelda_utilities.constants import *
 
-vec = pygame.math.Vector2
-
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, game, x, y, file_name='assets/image/spritesheet/zelda/zelda_character.png', frames=59):
+    def __init__(self, game, x, y, file_name, frames=59):
         # initialize parent class
         super().__init__()
         # Set game class
@@ -107,7 +105,7 @@ class Player(pygame.sprite.Sprite):
                 temp_pos_y = (self.hit_rect.centery - (self.hit_rect.centery % 8)) + 4
                 offset_pos = vec(temp_pos_x, temp_pos_y)
                 # Place beeper!
-                Beeper(self.game, offset_pos)
+                Beeper(self.game, offset_pos, BEEPER_SPRITESHEET)
                 # Play placement animation
                 self.stop_move = 1
                 self.placed_beeper = 1
