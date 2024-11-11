@@ -1,3 +1,5 @@
+2024 edit -> Deleted Sprite Images
+
 # PyGame Zelda clone
 **This was my final project for:**  
 Stanford's **Code In Place** class 2020  
